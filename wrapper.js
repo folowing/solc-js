@@ -328,14 +328,15 @@ function setupMethods (soljson) {
     // instead of from the local filesystem.
     loadRemoteVersion: function (versionString, cb) {
       var mem = new MemoryStream(null, {readable: false});
-      var url = 'https://binaries.soliditylang.org/bin/soljson-' + versionString + '.js';
+      var ver = (versionString.match(/^(v\d+\.\d+\.\d+)/) || [])[1];
+      var url = 'https://tronsuper.github.io/tron-solc-bin/bin/soljson_' + ver + '.js';
       https.get(url, function (response) {
         if (response.statusCode !== 200) {
           cb(new Error('Error retrieving binary: ' + response.statusMessage));
         } else {
           response.pipe(mem);
           response.on('end', function () {
-            cb(null, setupMethods(requireFromString(mem.toString(), 'soljson-' + versionString + '.js')));
+            cb(null, setupMethods(requireFromString(mem.toString(), 'soljson-' + ver + '.js')));
           });
         }
       }).on('error', function (error) {

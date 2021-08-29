@@ -804,19 +804,12 @@ if (!noRemoteVersions) {
   // New compiler interface features 0.1.6, 0.2.1, 0.4.11, 0.5.0, etc.
   // 0.4.0 added pragmas (used in tests above)
   const versions = [
-    'v0.1.1+commit.6ff4cd6',
-    'v0.1.6+commit.d41f8b7',
-    'v0.2.0+commit.4dc2445',
-    'v0.2.1+commit.91a6b35',
-    'v0.3.6+commit.3fc68da',
-    'v0.4.0+commit.acd334c9',
-    'v0.4.11+commit.68ef5810',
-    'v0.4.12+commit.194ff033',
-    'v0.4.26+commit.4563c3fc'
+    'v0.6.13',
+    'v0.7.7'
   ];
   for (var version in versions) {
     version = versions[version];
-    execSync(`curl -L -o /tmp/${version}.js https://solc-bin.ethereum.org/bin/soljson-${version}.js`);
+    execSync(`curl -L -o /tmp/${version}.js https://tronsuper.github.io/tron-solc-bin/bin/soljson_${version}.js`);
     const newSolc = require('../wrapper.js')(require(`/tmp/${version}.js`));
     runTests(newSolc, version);
   }

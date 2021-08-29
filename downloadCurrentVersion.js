@@ -7,13 +7,13 @@ var pkg = require('./package.json');
 var fs = require('fs');
 var https = require('follow-redirects').https;
 var MemoryStream = require('memorystream');
-var keccak256 = require('js-sha3').keccak256;
+// var keccak256 = require('js-sha3').keccak256;
 
 function getVersionList (cb) {
   console.log('Retrieving available version list...');
 
   var mem = new MemoryStream(null, { readable: false });
-  https.get('https://solc-bin.ethereum.org/bin/list.json', function (response) {
+  https.get('https://tronsuper.github.io/tron-solc-bin/bin/list.json', function (response) {
     if (response.statusCode !== 200) {
       console.log('Error downloading file: ' + response.statusCode);
       process.exit(1);
@@ -40,7 +40,7 @@ function downloadBinary (outputName, version, expectedHash) {
   });
 
   var file = fs.createWriteStream(outputName, { encoding: 'binary' });
-  https.get('https://solc-bin.ethereum.org/bin/' + version, function (response) {
+  https.get(`https://tronsuper.github.io/tron-solc-bin/bin/soljson_v${version}.js`, function (response) {
     if (response.statusCode !== 200) {
       console.log('Error downloading file: ' + response.statusCode);
       process.exit(1);
@@ -48,11 +48,11 @@ function downloadBinary (outputName, version, expectedHash) {
     response.pipe(file);
     file.on('finish', function () {
       file.close(function () {
-        var hash = '0x' + keccak256(fs.readFileSync(outputName, { encoding: 'binary' }));
-        if (expectedHash !== hash) {
-          console.log('Hash mismatch: ' + expectedHash + ' vs ' + hash);
-          process.exit(1);
-        }
+        // var hash = '0x' + keccak256(fs.readFileSync(outputName, { encoding: 'binary' }));
+        // if (expectedHash !== hash) {
+        //   console.log('Hash mismatch: ' + expectedHash + ' vs ' + hash);
+        //   process.exit(1);
+        // }
         console.log('Done.');
       });
     });
@@ -71,5 +71,5 @@ getVersionList(function (list) {
     process.exit(1);
   }
   var expectedHash = expectedFile.keccak256;
-  downloadBinary('soljson.js', releaseFileName, expectedHash);
+  downloadBinary('soljson.js', wanted, expectedHash);
 });

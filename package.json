@@ -1,10 +1,10 @@
 {
-  "name": "solc",
-  "version": "0.8.7",
+  "name": "tron-solc",
+  "version": "0.8.6",
   "description": "Solidity compiler",
   "main": "index.js",
   "bin": {
-    "solcjs": "solcjs"
+    "tron-solcjs": "solcjs"
   },
   "scripts": {
     "lint": "node ./node_modules/semistandard/bin/cmd.js",
