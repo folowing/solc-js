@@ -1,6 +1,6 @@
 {
   "name": "tron-solc",
-  "version": "0.8.6",
+  "version": "0.8.6-tron.1",
   "description": "Solidity compiler",
   "main": "index.js",
   "bin": {

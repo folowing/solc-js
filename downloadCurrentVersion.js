@@ -63,7 +63,7 @@ console.log('Downloading correct solidity binary...');
 
 getVersionList(function (list) {
   list = JSON.parse(list);
-  var wanted = pkg.version.match(/^(\d+\.\d+\.\d+)$/)[1];
+  var wanted = pkg.version.match(/^(\d+\.\d+\.\d+)/)[1];
   var releaseFileName = list.releases[wanted];
   var expectedFile = list.builds.filter(function (entry) { return entry.path === releaseFileName; })[0];
   if (!expectedFile) {

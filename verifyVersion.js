@@ -3,6 +3,7 @@
 var semver = require('semver');
 
 var packageVersion = require('./package.json').version;
+packageVersion = packageVersion.match(/^(\d+\.\d+\.\d+)/)[1];
 var solcVersion = require('./index.js').version();
 
 console.log('solcVersion: ' + solcVersion);

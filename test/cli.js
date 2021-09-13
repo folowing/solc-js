@@ -5,7 +5,8 @@ const pkg = require('../package.json');
 tape('CLI', function (t) {
   t.test('--version', function (st) {
     var spt = spawn(st, './solcjs --version');
-    spt.stdout.match(RegExp(pkg.version + '(-[^a-zA-A0-9.+]+)?(\\+[^a-zA-Z0-9.-]+)?'));
+    var version = pkg.version.match(/^(\d+\.\d+\.\d+)/)[1];
+    spt.stdout.match(RegExp(version + '(-[^a-zA-A0-9.+]+)?(\\+[^a-zA-Z0-9.-]+)?'));
     spt.stderr.empty();
     spt.end();
   });
